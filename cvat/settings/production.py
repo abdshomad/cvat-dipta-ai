@@ -7,6 +7,19 @@ from .base import *  # pylint: disable=wildcard-import
 
 DEBUG = False
 
+# Cross-Origin Resource Sharing settings for CVAT UI
+UI_SCHEME = os.environ.get("CVAT_UI_SCHEME", "http")
+UI_HOST = os.environ.get("CVAT_UI_HOST", "localhost")
+UI_PORT = os.environ.get("CVAT_UI_PORT", "")
+CORS_ALLOW_CREDENTIALS = True
+UI_URL = "{}://{}".format(UI_SCHEME, UI_HOST)
+
+if UI_PORT and UI_PORT != "80" and UI_PORT != "443":
+    UI_URL += ":{}".format(UI_PORT)
+
+CSRF_TRUSTED_ORIGINS = [UI_URL]
+CORS_ORIGIN_WHITELIST = [UI_URL]
+
 NUCLIO["HOST"] = os.getenv("CVAT_NUCLIO_HOST", "nuclio")
 
 # Django-sendfile:

@@ -67,7 +67,7 @@ Note: Port 8080 was already in use on your system, so we configured CVAT to use 
 
 ## Modified Files
 
-- `docker-compose.yml`: 
+- `docker-compose.yml`:
   - Updated traefik port mapping from 8080 to 8081
   - Added CSRF trusted origins configuration for Cloudflare Tunnel:
     - CVAT_UI_SCHEME: 'https' (for Cloudflare Tunnel SSL termination)
