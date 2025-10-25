@@ -7,8 +7,9 @@ CVAT has been successfully installed and is running with Docker Compose.
 ## Configuration
 
 - **CVAT Host**: dipta-ai-cvat.demoin.id
-- **Access Port**: 8081
-- **Access URL**: http://dipta-ai-cvat.demoin.id:8081
+- **Access Port**: 8081 (local Docker), 443 (via Cloudflare Tunnel)
+- **Access URL**: https://dipta-ai-cvat.demoin.id (via Cloudflare Tunnel)
+- **Local Access**: http://localhost:8081
 
 ## Important: Add Hostname to /etc/hosts
 
@@ -26,8 +27,13 @@ echo "127.0.0.1 dipta-ai-cvat.demoin.id" | sudo tee -a /etc/hosts
 
 ## Accessing CVAT
 
+### Via Cloudflare Tunnel (Recommended)
+1. **Open your browser** and navigate to: https://dipta-ai-cvat.demoin.id
+2. **Create your admin account** on first access
+
+### Via Local Access
 1. **Add the hostname to /etc/hosts** (see above)
-2. **Open your browser** and navigate to: http://dipta-ai-cvat.demoin.id:8081
+2. **Open your browser** and navigate to: http://localhost:8081
 3. **Create your admin account** on first access
 
 ## Docker Compose Commands
@@ -63,7 +69,10 @@ Note: Port 8080 was already in use on your system, so we configured CVAT to use 
 
 - `docker-compose.yml`: 
   - Updated traefik port mapping from 8080 to 8081
-  - Added CSRF trusted origins configuration (CVAT_UI_SCHEME, CVAT_UI_HOST, CVAT_UI_PORT)
+  - Added CSRF trusted origins configuration for Cloudflare Tunnel:
+    - CVAT_UI_SCHEME: 'https' (for Cloudflare Tunnel SSL termination)
+    - CVAT_UI_HOST: dipta-ai-cvat.demoin.id
+    - CVAT_UI_PORT: '' (empty, uses standard HTTPS port 443)
 
 ## Next Steps
 
