@@ -99,6 +99,9 @@ services:
       CVAT_ANALYTICS: 1
       CVAT_BASE_URL:
       ONE_RUNNING_JOB_IN_QUEUE_PER_USER:
+      CVAT_UI_SCHEME: 'http'
+      CVAT_UI_HOST: '${CVAT_HOST:-localhost}'
+      CVAT_UI_PORT: '8081'
     command: init run server
     labels:
       traefik.enable: "true"
